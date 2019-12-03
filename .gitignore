@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+tmp/
+newrelic_agent.log
+.env
