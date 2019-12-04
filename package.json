@@ -4,7 +4,8 @@
   "description": "Bolt app starter",
   "main": "index.js",
   "scripts": {
-    "local": "node_modules/.bin/nodemon index.js"
+    "local": "node_modules/.bin/nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

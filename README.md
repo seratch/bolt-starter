@@ -1,16 +1,130 @@
 # Getting started with Bolt ⚡️
 
-This is a simple [Slack's Bolt⚡️](https://slack.dev/bolt/) app template.
+This is a simple [Slack's Bolt⚡️](https://slack.dev/bolt/) app template. This README covers the following ways to start building your awesome Slack apps.
 
-# How to set up
+* [CodeSandbox](https://codesandbox.io/): Step 1 -> Step 2A
+* [Glitch](https://glitch.com/): Step 1 -> Step 2B
+* On your local machine (Linux/macOS/Windows): Step 1 -> Step 2C
 
-## Create a Slack App
+---
 
-https://api.slack.com/apps
+## (Step 1) Slack App Initial Setup
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/create_slack_app.png" width=600 />
+### Create a Slack App
 
-## ngrok
+Start with creating a new Slack app from https://api.slack.com/apps
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/create_slack_app.png" width=400 />
+
+### Add a bot user
+
+Add a bot user to enable generating bot tokens.
+
+`https://api.slack.com/apps/{APP_ID}/bots`
+
+### Install the app to your workspace
+
+You'll configure more later but let's install the app anyway to get a bot token (`xoxb-***`).
+
+`https://api.slack.com/apps/{APP_ID}/install-on-team`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+
+---
+
+## (Step 2A) CodeSandbox Setup
+
+### Sign in with your GitHub account
+
+https://codesandbox.io/
+
+As of December 2019, CodeSandbox allows logging in with only GitHub accounts. You need to login with your own GitHub account.
+
+### Create a new sandbox
+
+It's pretty simple. Create a new sandbox by importing this repostiory and configure env variables. The steps are:
+
+* Click `Create Sandbox`
+* Go to `IMPORT` tab
+* Put `https://github.com/seratch/bolt-starter` in the textbox
+* Click `Open Sandbox`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_github_import.png" width=400 />
+
+Then, fork the template project to create your own sandbox:
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_fork_template.png" width=400 />
+
+In your own sandbox project, configure secrets as below:
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_secrets.png" width=400 />
+
+That's all!
+
+### Set Request URLs (Slack App)
+
+You must see `https://{random}.sse.codesandbox.io/` URL in the right pane on CodeSandbox.
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_url.png" width=400 />
+
+You can go with `https://{random}.sse.codesandbox.io/slack/events` for all of the Slack App Request URLs. 
+
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+* `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+### Re-install Slack App to your workspace
+
+`https://api.slack.com/apps/{APP_ID}/install-on-team`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+
+---
+
+## (Step 2B) Glitch Setup
+
+https://glitch.com/
+
+### Create a Gltich project
+
+The steps are similar to CodeSandbox.
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_clone_repo.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_paste_url.png" width=400 />
+
+After creating a project, duplicate `_env` file and name it as `.env`. The file named `.env` will be automatically marked as a secret file.
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_duplicate_env.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_env_file.png" width=400 />
+
+After modifying `.env` file, make sure if the app is running without any problems by checking the logs.
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_tools.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_logs.png" width=400 />
+
+### Set Request URLs (Slack App)
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_live_app.png" width=400 />
+
+You must see `https://{some-fancy-name}.glitch.me/` URL in the right pane on CodeSandbox.
+
+You can go with `https://{some-fancy-name}.glitch.me/slack/events` for all of the Slack App Request URLs. 
+
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+* `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+### Re-install Slack App to your workspace
+
+`https://api.slack.com/apps/{APP_ID}/install-on-team`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+
+---
+
+## (Step 2C) Your Local Machine Setup
+
+### ngrok Setup
 
 https://ngrok.com/
 
@@ -24,9 +138,11 @@ If you have a paid license, you can configure a fixed subdomain.
 ngrok http 3000 --subdomain your-awesome-subdomain
 ```
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/ngrok.png" width=600 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/ngrok.png" width=400 />
 
-### Setup Reequest URL
+### Set Request URLs (Slack App)
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=400 />
 
 Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the followings:
 
@@ -34,22 +150,20 @@ Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the follo
 * `https://api.slack.com/apps/{APP_ID}/slash-commands`
 * `https://api.slack.com/apps/{APP_ID}/interactive-messages`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=600 />
-
-### Add a bot user and install the app to your workspace
+### Re-install the app to your workspace
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=600 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
 
-## nvm
+### Node Version Manager (nvm) Setup
 
-### Linux / macOS
+#### Linux / macOS
 
 * Install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm#installation-and-update)
 * `nvm install --lts` (installing latest LTS version)
 
-### Windows
+#### Windows
 
 * Install [nvm-windows](https://github.com/coreybutler/nvm-windows) from [here](https://github.com/coreybutler/nvm-windows/releases)
 * `mvn list available` to check the available versions
@@ -57,15 +171,15 @@ Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the follo
 
 If you go with WSL, follow the same steps in `Linux / macOS`.
 
-## Start with this template
+### Start with this template
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/use_template.png" width=600 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/use_template.png" width=400 />
 
 Or it's also possible to download this project template:
 
 `git clone git@github.com:seratch/bolt-starter.git` or https://github.com/seratch/bolt-starter/archive/master.zip
 
-## Run the app
+### Run the app
 
 ```bash
 cd bolt-starter
