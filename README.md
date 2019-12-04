@@ -42,7 +42,7 @@ As of December 2019, CodeSandbox allows logging in with only GitHub accounts. Yo
 
 ### Create a new sandbox
 
-It's pretty simple. Create a new sandbox by importing this repostiory and configure env variables. The steps are:
+It's pretty simple. Create a new sandbox by importing this repostiory. The steps are:
 
 * Click `Create Sandbox`
 * Go to `IMPORT` tab
@@ -85,7 +85,7 @@ You can go with `https://{random}.sse.codesandbox.io/slack/events` for all of th
 
 https://glitch.com/
 
-### Create a Gltich project
+### Create a Glitch project
 
 The steps are similar to CodeSandbox.
 
@@ -106,7 +106,7 @@ After modifying `.env` file, make sure if the app is running without any problem
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/glitch_live_app.png" width=400 />
 
-You must see `https://{some-fancy-name}.glitch.me/` URL in the right pane on CodeSandbox.
+You must see `https://{some-fancy-name}.glitch.me/` URL in the Live App settings on Glitch.
 
 You can go with `https://{some-fancy-name}.glitch.me/slack/events` for all of the Slack App Request URLs. 
 
