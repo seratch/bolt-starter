@@ -59,7 +59,12 @@ In your own sandbox project, configure secrets as below:
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_secrets.png" width=400 />
 
-That's all!
+* SLACK_SIGNING_SECRET: `https://api.slack.com/apps/{APP_ID}/general` Basic Information > App Credentials > Signing Secret
+* SLACK_BOT_TOKEN: `https://api.slack.com/apps/{APP_ID}/install-on-team` Set the Bot User OAuth Access Token (starting with `xoxb-`)
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_edit_secrets.png" width=400 />
+
+That's all! If your changes are not reflected to the running sandbox, click `Restart Sandbox` button.
 
 ### Set Request URLs (Slack App)
 

@@ -3,3 +3,5 @@ package-lock.json
 tmp/
 newrelic_agent.log
 .env
+.DS_Store
+

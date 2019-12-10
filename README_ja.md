@@ -59,7 +59,12 @@ https://codesandbox.io/
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_secrets.png" width=400 />
 
-たった、これだけで完了です！
+* SLACK_SIGNING_SECRET: `https://api.slack.com/apps/{APP_ID}/general` Basic Information > App Credentials > Signing Secret
+* SLACK_BOT_TOKEN: `https://api.slack.com/apps/{APP_ID}/install-on-team` にある `xoxb-` で始まる Bot User OAuth Access Token
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_edit_secrets.png" width=400 />
+
+たった、これだけで完了です！もし変更しても反映されないときは同じ画面の Restart Sandbox ボタンを押してください。
 
 ### Request URL (Slack App) を設定
 
