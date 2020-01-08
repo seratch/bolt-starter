@@ -162,7 +162,7 @@ ngrok http 3000 --subdomain your-awesome-subdomain
 * `mvn list available` を実行してダウンロード可能なバージョンを調べる
 * `nvm install {最新の LTS バージョン}` (最新の LTS バージョンをインストール)
 
-もし Install Windows Subsystem for Linux (WSL) を使っている場合は `Linux / macOS` と全く同じステップでいけるはずです。
+もし Windows Subsystem for Linux (WSL) を使っている場合は `Linux / macOS` と全く同じステップでいけるはずです。
 
 ### このテンプレートを使って開発を始める
 
