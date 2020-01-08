@@ -149,24 +149,6 @@ ngrok http 3000 --subdomain your-awesome-subdomain
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/ngrok.png" width=400 />
 
-### Request URL (Slack App) を設定
-
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=400 />
-
-`https://{your-awesome-subdomain}.ngrok.io/slack/events` のような URL を以下の Request URL の項目に設定します。全て同じ URL で OK です。
-
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
-* `https://api.slack.com/apps/{APP_ID}/slash-commands`
-* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
-
-### Slack App をワークスペースに再インストール
-
-設定が変更されて、再インストールを促されていると思います。もう一度インストールし直してください。
-
-`https://api.slack.com/apps/{APP_ID}/install-on-team`
-
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
-
 ### Node Version Manager (nvm) のセットアップ
 
 #### Linux / macOS
@@ -201,6 +183,24 @@ npm run local
 ```
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/npm_run_local.png" width=400 />
+
+### Request URL (Slack App) を設定
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=400 />
+
+`https://{your-awesome-subdomain}.ngrok.io/slack/events` のような URL を以下の Request URL の項目に設定します。全て同じ URL で OK です。
+
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+* `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+### Slack App をワークスペースに再インストール
+
+設定が変更されて、再インストールを促されていると思います。もう一度インストールし直してください。
+
+`https://api.slack.com/apps/{APP_ID}/install-on-team`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
 
 # ライセンス
 
