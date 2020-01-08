@@ -145,22 +145,6 @@ ngrok http 3000 --subdomain your-awesome-subdomain
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/ngrok.png" width=400 />
 
-### Set Request URLs (Slack App)
-
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=400 />
-
-Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the followings:
-
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
-* `https://api.slack.com/apps/{APP_ID}/slash-commands`
-* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
-
-### Re-install the app to your workspace
-
-`https://api.slack.com/apps/{APP_ID}/install-on-team`
-
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
-
 ### Node Version Manager (nvm) Setup
 
 #### Linux / macOS
@@ -195,6 +179,23 @@ npm run local
 ```
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/npm_run_local.png" width=400 />
+
+### Set Request URLs (Slack App)
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/request_url.png" width=400 />
+
+Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the followings:
+
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+* `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+### Re-install the app to your workspace
+
+`https://api.slack.com/apps/{APP_ID}/install-on-team`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+
 
 # License
 
