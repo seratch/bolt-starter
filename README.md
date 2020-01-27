@@ -16,19 +16,25 @@ Start with creating a new Slack app from https://api.slack.com/apps
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/create_slack_app.png" width=400 />
 
-### Add a bot user
+### Configure Bot Scopes
 
-Add a bot user to enable generating bot tokens.
+Access **Features > OAuth & Permissions** from the left sidebar and set the followings.
 
-`https://api.slack.com/apps/{APP_ID}/bots`
+`https://api.slack.com/apps/{APP_ID}/oauth`
+
+* `app_mentioned:read`
+* `chat:write`
+* `commands`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_scopes.png" width=400 />
 
 ### Install the app to your workspace
 
-You'll configure more later but let's install the app anyway to get a bot token (`xoxb-***`).
+Access **Settings > Install App** from the left sidebar. You'll configure more later but let's install the app anyway to get a bot token (`xoxb-***`).
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
 
 ---
 
@@ -186,15 +192,46 @@ npm run local
 
 Set `https://{your-awesome-subdomain}.ngrok.io/slack/events` to all of the followings:
 
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
 * `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
 * `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+#### Slash Commands
+
+Access **Features > Slash Commands** from the left sidebar. Create a slash command named `/open-modal`.
+
+`https://api.slack.com/apps/{APP_ID}/slash-commands`
+
+* Command: `/open-modal`
+* request URL: `https://{your-awesome-subdomain}.ngrok.io/slack/events`
+* Short Description: whatever you like
+* Click "Save" for sure
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/slash_command.png" width=400 />
+
+#### Configure Event Subscriptions
+
+Access **Features > Event Subscriptions** from the left sidebar. Add an event subscription for `app_mention` events and click "Save Changes" button for sure..
+
+`https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+
+* `app_mention`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/event_subscriptions.png" width=400 />
+
+#### Configure Interactive Components
+
+Access **Features > Interactive Components** from the left sidebar. Set the Request URL for Interactive Components and click "Save Changes" button for sure.
+
+`https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/interactive_components.png" width=400 />
 
 ### Re-install the app to your workspace
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
 
 
 # License

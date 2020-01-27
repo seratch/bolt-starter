@@ -16,19 +16,25 @@
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/create_slack_app.png" width=400 />
 
-### bot ユーザを追加
+### ボットスコープ（Bot Scope) を設定
 
-bot token を取得するために bot user を追加します。
+左サイドバーから Features > OAuth & Permissions へアクセスして、Bot Scope を以下の通り追加します。
 
-`https://api.slack.com/apps/{APP_ID}/bots`
+`https://api.slack.com/apps/{APP_ID}/oauth`
+
+* `app_mentioned:read`
+* `chat:write`
+* `commands`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_scopes.png" width=400 />
 
 ### Slack App をワークスペースにインストール
 
-さらにいくつかの設定を後ほど行いますが、まずは bot token (`xoxb-***`) を入手するためにワークスペースにインストールしてみてください。
+左サイドバーから **Settings > Install App** にアクセスしてください。さらにいくつかの設定を後ほど行いますが、まずは bot token (`xoxb-***`) を入手するためにワークスペースにインストールしてみてください。
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
 
 ---
 
@@ -190,9 +196,40 @@ npm run local
 
 `https://{your-awesome-subdomain}.ngrok.io/slack/events` のような URL を以下の Request URL の項目に設定します。全て同じ URL で OK です。
 
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
 * `https://api.slack.com/apps/{APP_ID}/slash-commands`
+* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
 * `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+#### Slash Commands を設定
+
+左サイドバーから **Features > Slash Commands** へアクセスします。`/open-modal` というスラッシュコマンドを以下の内容で設定し、保存します。
+
+`https://api.slack.com/apps/{APP_ID}/slash-commands`
+
+* Command: `/open-modal`
+* request URL: `https://{your-awesome-subdomain}.ngrok.io/slack/events`
+* Short Description: お好きな内容で
+* "Save" ボタンを押すのを忘れずに！
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/slash_command.png" width=400 />
+
+#### Event Subscriptions を設定
+
+左サイドバーから **Features > Event Subscriptions** へアクセスします。有効にしたら `app_mention` というイベントを bot event で受信するよう設定し、忘れずに "Save Changes" ボタンを押してください。
+
+`https://api.slack.com/apps/{APP_ID}/event-subscriptions`
+
+* `app_mention`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/event_subscriptions.png" width=400 />
+
+#### Interactive Components を設定
+
+左サイドバーから **Features > Interactive Components** へアクセスします。有効にしたら Request URL を適切に設定して "Save Changes" ボタンを忘れずに押してください。
+
+`https://api.slack.com/apps/{APP_ID}/interactive-messages`
+
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/interactive_components.png" width=400 />
 
 ### Slack App をワークスペースに再インストール
 
@@ -200,7 +237,7 @@ npm run local
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
 
 # ライセンス
 
