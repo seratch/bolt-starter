@@ -33,7 +33,6 @@ app.event("app_mention", ({ event, say }) => {
     "app_mention event payload:\n\n" + JSON.stringify(event, null, 2) + "\n"
   );
   say({
-    channel: event.channel,
     text: `:wave: <@${event.user}> Hi there!`
   });
 });
@@ -208,14 +207,16 @@ function postViaResponseUrl(responseUrl, response) {
 // Request dumper middleware for easier debugging
 if (process.env.SLACK_REQUEST_LOG_ENABLED === "1") {
   app.use(args => {
-    args.context = JSON.parse(JSON.stringify(args.context));
-    args.context.botToken = 'xoxb-***';
-    if (args.context.userToken) {
-      args.context.userToken = 'xoxp-***';
+    const copiedArgs = JSON.parse(JSON.stringify(args));
+    copiedArgs.context.botToken = 'xoxb-***';
+    if (copiedArgs.context.userToken) {
+      copiedArgs.context.userToken = 'xoxp-***';
     }
+    copiedArgs.client = {};
+    copiedArgs.logger = {};
     logger.debug(
       "Dumping request data for debugging...\n\n" +
-      JSON.stringify(args, null, 2) +
+      JSON.stringify(copiedArgs, null, 2) +
       "\n"
     );
     args.next();
