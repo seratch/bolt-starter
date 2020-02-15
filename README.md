@@ -90,7 +90,7 @@ You need to configure the following three settings with the URL.
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
-<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth.png" width=400 />
+<img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
 
 ---
 
