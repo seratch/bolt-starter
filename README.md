@@ -51,7 +51,7 @@ As of December 2019, CodeSandbox allows logging in with only GitHub accounts. Yo
 It's pretty simple. Create a new sandbox by importing this repostiory. The steps are:
 
 * Click `Create Sandbox`
-* Go to `IMPORT` tab
+* Go to `Import` tab
 * Put `https://github.com/seratch/bolt-starter` in the textbox
 * Click `Open Sandbox`
 
@@ -65,8 +65,8 @@ In your own sandbox project, configure secrets as below:
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_secrets.png" width=400 />
 
-* SLACK_SIGNING_SECRET: `https://api.slack.com/apps/{APP_ID}/general` Basic Information > App Credentials > Signing Secret
-* SLACK_BOT_TOKEN: `https://api.slack.com/apps/{APP_ID}/install-on-team` Set the Bot User OAuth Access Token (starting with `xoxb-`)
+* SLACK_SIGNING_SECRET: Use the value you can find at **Basic Information > App Credentials > Signing Secret**
+* SLACK_BOT_TOKEN: Use the Bot User OAuth Access Token (starting with `xoxb-`) you can find at **Settings > Install App**
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_edit_secrets.png" width=400 />
 
@@ -80,9 +80,11 @@ You must see `https://{random}.sse.codesandbox.io/` URL in the right pane on Cod
 
 You can go with `https://{random}.sse.codesandbox.io/slack/events` for all of the Slack App Request URLs. 
 
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
-* `https://api.slack.com/apps/{APP_ID}/slash-commands`
-* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+You need to configure the following three settings with the URL.
+
+* Interactive Components: Turn on first, set the Request URL, and then click "Save Changes" button
+* Slash Commands: Add `/open-modal` command with the above URL for Reequest URL
+* Event Subscriptions: Turn on first, set the Request URL, add `app_mention` in Bot Events, and then click "Save Changes" button
 
 ### Re-install Slack App to your workspace
 

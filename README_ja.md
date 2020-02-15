@@ -51,7 +51,7 @@ https://codesandbox.io/
 この手順はとても簡単です。この GitHub リポジトリを import 対象として指定して、新規の Sandbox を作ってください。
 
 * `Create Sandbox` をクリック
-* `IMPORT` タブへ遷移
+* `Import` タブへ遷移
 * `https://github.com/seratch/bolt-starter` を入力
 * `Open Sandbox` をクリック
 
@@ -65,8 +65,8 @@ https://codesandbox.io/
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_secrets.png" width=400 />
 
-* SLACK_SIGNING_SECRET: `https://api.slack.com/apps/{APP_ID}/general` Basic Information > App Credentials > Signing Secret
-* SLACK_BOT_TOKEN: `https://api.slack.com/apps/{APP_ID}/install-on-team` にある `xoxb-` で始まる Bot User OAuth Access Token
+* SLACK_SIGNING_SECRET: **Basic Information > App Credentials > Signing Secret** の値を表示して取得
+* SLACK_BOT_TOKEN: Slack App 管理画面 **Settings > Install App** に表示された `xoxb-` で始まる **Bot User OAuth Access Token**
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_edit_secrets.png" width=400 />
 
@@ -78,11 +78,11 @@ CodeSandbox の右側のペインを見ると `https://{random}.sse.codesandbox.
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/codesandbox_url.png" width=400 />
 
-この URL に `/slack/events` というパスを加えた `https://{random}.sse.codesandbox.io/slack/events` を Slack App 内の Request URL の項目に設定します。全て同じ URL で OK です。
+この URL に `/slack/events` というパスを加えた `https://{random}.sse.codesandbox.io/slack/events` を Slack App 内の Request URL の項目に設定します。全て同じ URL で OK です。設定する箇所は以下の三箇所です。
 
-* `https://api.slack.com/apps/{APP_ID}/event-subscriptions`
-* `https://api.slack.com/apps/{APP_ID}/slash-commands`
-* `https://api.slack.com/apps/{APP_ID}/interactive-messages`
+* Interactive Components: Off -> On に変えて Request URL を指定したら Save Changes で保存
+* Slash Commands: `/open-modal` という名前のコマンドを追加、その Request URL に上記の URL を指定して保存
+* Event Subscriptions: Off -> On に変えて Request URL を設定し Bot Events の中の `app_mention` を選択して Save Changes で保存
 
 ### Slack App をワークスペースに再インストール
 
