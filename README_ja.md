@@ -80,7 +80,7 @@ CodeSandbox の右側のペインを見ると `https://{random}.sse.codesandbox.
 
 この URL に `/slack/events` というパスを加えた `https://{random}.sse.codesandbox.io/slack/events` を Slack App 内の Request URL の項目に設定します。全て同じ URL で OK です。設定する箇所は以下の三箇所です。
 
-* Interactive Components: Off -> On に変えて Request URL を指定したら Save Changes で保存
+* Interactivity & Shortcuts: Off -> On に変えて Request URL を指定したら Save Changes で保存
 * Slash Commands: `/open-modal` という名前のコマンドを追加、その Request URL に上記の URL を指定して保存
 * Event Subscriptions: Off -> On に変えて Request URL を設定し Bot Events の中の `app_mention` を選択して Save Changes で保存
 
@@ -223,13 +223,22 @@ npm run local
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/event_subscriptions.png" width=400 />
 
-#### Interactive Components を設定
+#### Interactivity & Shortcuts を設定
 
-左サイドバーから **Features > Interactive Components** へアクセスします。有効にしたら Request URL を適切に設定して "Save Changes" ボタンを忘れずに押してください。
+左サイドバーから **Features > Interactivity & Shortcuts** へアクセスします。有効にしたら Request URL を適切に設定して "Save Changes" ボタンを忘れずに押してください。
 
 `https://api.slack.com/apps/{APP_ID}/interactive-messages`
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/interactive_components.png" width=400 />
+
+#### Global Shortcuts
+
+左サイドバーから **Features > Interactivity & Shortcuts > Shortcuts** へアクセスします。Callback ID `open-modal` でグローバルショットカットをつくります。
+
+* Name: お好きな内容で
+* Short Description: お好きな内容で
+* Callback ID: `open-modal`
+* "Create" ボタンをクリック
 
 ### Slack App をワークスペースに再インストール
 

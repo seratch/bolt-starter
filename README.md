@@ -221,20 +221,28 @@ Access **Features > Event Subscriptions** from the left sidebar. Add an event su
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/event_subscriptions.png" width=400 />
 
-#### Configure Interactive Components
+#### Configure Interactivity
 
-Access **Features > Interactive Components** from the left sidebar. Set the Request URL for Interactive Components and click "Save Changes" button for sure.
+Access **Features > Interactivity & Shortcuts** from the left sidebar. Set the Request URL for Interactity and click "Save Changes" button for sure.
 
 `https://api.slack.com/apps/{APP_ID}/interactive-messages`
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/interactive_components.png" width=400 />
+
+#### Global Shortcuts
+
+Access **Features > Interactivity & Shortcuts > Shortcuts** from the left sidebar. Create a new global shortcut with Callback ID `open-modal`.
+
+* Name: whatever you like
+* Short Description: whatever you like
+* Callback ID: `open-modal`
+* Click "Create"
 
 ### Re-install the app to your workspace
 
 `https://api.slack.com/apps/{APP_ID}/install-on-team`
 
 <img src="https://github.com/seratch/bolt-starter/raw/master/images/oauth_installation.png" width=400 />
-
 
 # License
 
