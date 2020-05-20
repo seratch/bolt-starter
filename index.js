@@ -16,29 +16,29 @@ const processBeforeResponse = false;
 // Manually instantiate to add external routes afterwards
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  processBeforeResponse,
+  processBeforeResponse
 });
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   logLevel,
   receiver,
-  processBeforeResponse,
+  processBeforeResponse
 });
 
 // Request dumper middleware for easier debugging
 if (process.env.SLACK_REQUEST_LOG_ENABLED === "1") {
-  app.use(async (args) => {
+  app.use(async args => {
     const copiedArgs = JSON.parse(JSON.stringify(args));
-    copiedArgs.context.botToken = 'xoxb-***';
+    copiedArgs.context.botToken = "xoxb-***";
     if (copiedArgs.context.userToken) {
-      copiedArgs.context.userToken = 'xoxp-***';
+      copiedArgs.context.userToken = "xoxp-***";
     }
     copiedArgs.client = {};
     copiedArgs.logger = {};
     args.logger.debug(
       "Dumping request data for debugging...\n\n" +
-      JSON.stringify(copiedArgs, null, 2) +
-      "\n"
+        JSON.stringify(copiedArgs, null, 2) +
+        "\n"
     );
     const result = await args.next();
     args.logger.debug("next() call completed");
@@ -52,7 +52,9 @@ if (process.env.SLACK_REQUEST_LOG_ENABLED === "1") {
 
 // https://api.slack.com/apps/{APP_ID}/event-subscriptions
 app.event("app_mention", async ({ logger, event, say }) => {
-  logger.debug("app_mention event payload:\n\n" + JSON.stringify(event, null, 2) + "\n");
+  logger.debug(
+    "app_mention event payload:\n\n" + JSON.stringify(event, null, 2) + "\n"
+  );
   const result = await say({ text: `:wave: <@${event.user}> Hi there!` });
   logger.debug("say result:\n\n" + JSON.stringify(result, null, 2) + "\n");
   return result;
@@ -75,81 +77,63 @@ app.view("task-modal", async ({ logger, client, body, ack }) => {
 async function openModal({ logger, client, ack, body }) {
   try {
     const res = await client.views.open({
-      "trigger_id": body.trigger_id,
+      trigger_id: body.trigger_id,
       // Block Kit Builder - http://j.mp/bolt-starter-modal-json
-      "view": {
-        "type": "modal",
-        "callback_id": "task-modal",
-        "private_metadata": JSON.stringify(body), // Remove this when pasting this in Block Kit Builder
-        "title": {
-          "type": "plain_text",
-          "text": "Create a task",
-          "emoji": true
+      view: {
+        type: "modal",
+        callback_id: "task-modal",
+        private_metadata: JSON.stringify(body), // Remove this when pasting this in Block Kit Builder
+        title: {
+          type: "plain_text",
+          text: "Create a task",
+          emoji: true
         },
-        "submit": {
-          "type": "plain_text",
-          "text": "Submit",
-          "emoji": true
+        submit: {
+          type: "plain_text",
+          text: "Submit",
+          emoji: true
         },
-        "close": {
-          "type": "plain_text",
-          "text": "Cancel",
-          "emoji": true
+        close: {
+          type: "plain_text",
+          text: "Cancel",
+          emoji: true
         },
-        "blocks": [
+        blocks: [
           {
-            "type": "input",
-            "block_id": "input-title",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "input",
-              "initial_value": body.text // Remove this when pasting this in Block Kit Builder
+            type: "input",
+            block_id: "input-title",
+            element: {
+              type: "plain_text_input",
+              action_id: "input",
+              initial_value: body.text // Remove this when pasting this in Block Kit Builder
             },
-            "label": {
-              "type": "plain_text",
-              "text": "Title",
-              "emoji": true
+            label: {
+              type: "plain_text",
+              text: "Title",
+              emoji: true
             },
-            "optional": false
+            optional: false
           },
           {
-            "type": "input",
-            "block_id": "input-deadline",
-            "element": {
-              "type": "datepicker",
-              "action_id": "input",
-              "placeholder": {
-                "type": "plain_text",
-                "text": "Select a date",
-                "emoji": true
+            type: "actions",
+            elements: [
+              {
+                type: "channels_select",
+                block_id: "channels_select",
+                placeholder: {
+                  type: "plain_text",
+                  text: "Select a channel",
+                  emoji: true
+                }
               }
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "Deadline",
-              "emoji": true
-            },
-            "optional": true
-          },
-          {
-            "type": "input",
-            "block_id": "input-description",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "input",
-              "multiline": true
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "Description",
-              "emoji": true
-            },
-            "optional": true
+            ]
           }
         ]
       }
     });
-    logger.debug("views.open response:\n\n" + JSON.stringify(res, null, 2) + "\n");
+    logger.debug(
+      "views.open response:\n\n" + JSON.stringify(res, null, 2) + "\n"
+    );
     await ack();
   } catch (e) {
     logger.error("views.open error:\n\n" + JSON.stringify(e, null, 2) + "\n");
@@ -158,12 +142,16 @@ async function openModal({ logger, client, ack, body }) {
 }
 
 async function handleViewSubmission({ logger, client, body, ack }) {
-  logger.debug("view_submission view payload:\n\n" + JSON.stringify(body.view, null, 2) + "\n");
+  logger.debug(
+    "view_submission view payload:\n\n" +
+      JSON.stringify(body.view, null, 2) +
+      "\n"
+  );
 
   const stateValues = body.view.state.values;
   const title = stateValues["input-title"]["input"].value;
-  const deadline = stateValues["input-deadline"]["input"].selected_date;
-  const description = stateValues["input-description"]["input"].value;
+  const channel = stateValues["channels_select"]["input"].selected_date;
+  const description = ""; //stateValues["input-description"]["input"].value;
 
   const errors = {};
   if (title.length <= 5) {
@@ -176,34 +164,32 @@ async function handleViewSubmission({ logger, client, body, ack }) {
     });
   } else {
     // Save the input to somewhere
-    logger.info(`Valid response:\ntitle: ${title}\ndeadline: ${deadline}\ndescription: ${description}\n`);
+    logger.info(
+      `Valid response:\ntitle: ${title}\ndeadline: ${channel}\ndescription: ${description}\n`
+    );
     // Post a message using response_url given by the slash comamnd
     const command = JSON.parse(body.view.private_metadata);
     const message = {
-      "text": "[fallback] Somehow Slack app failed to render blocks",
+      text: "[fallback] Somehow Slack app failed to render blocks",
       // Block Kit Builder - http://j.mp/bolt-starter-msg-json
-      "blocks": [
+      blocks: [
         {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Your new task was successfully created! :rocket:*"
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Your new task was successfully created! :rocket:*"
           }
         },
         {
-          "type": "section",
-          "fields": [
+          type: "section",
+          fields: [
             {
-              "type": "mrkdwn",
-              "text": `*Title:*\n${title}`
+              type: "mrkdwn",
+              text: `*Title:*\n${title}`
             },
             {
-              "type": "mrkdwn",
-              "text": `*Deadline:*\n${deadline}`
-            },
-            {
-              "type": "mrkdwn",
-              "text": `*Description:*\n${description}`
+              type: "mrkdwn",
+              text: `*channel:*\n${title}`
             }
           ]
         }
@@ -222,14 +208,16 @@ async function handleViewSubmission({ logger, client, body, ack }) {
         text: message.text,
         blocks: message.blocks
       });
-      logger.debug("chat.postMessage response:\n\n" + JSON.stringify(res, null, 2) + "\n");
+      logger.debug(
+        "chat.postMessage response:\n\n" + JSON.stringify(res, null, 2) + "\n"
+      );
     }
     await ack();
   }
 }
 
 // Utility to post a message using response_url
-const axios = require('axios');
+const axios = require("axios");
 function postViaResponseUrl(responseUrl, response) {
   return axios.post(responseUrl, response);
 }
