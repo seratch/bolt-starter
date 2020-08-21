@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/seratch/bolt-starter#readme",
   "dependencies": {
-    "@slack/bolt": "^2.0.1",
+    "@slack/bolt": "^2.2.3",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.4"
   }
 }
