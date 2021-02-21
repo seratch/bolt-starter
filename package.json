@@ -4,7 +4,10 @@
   "description": "Bolt app starter",
   "main": "index.js",
   "scripts": {
-    "local": "node_modules/.bin/nodemon index.js",
+    "local": "node_modules/.bin/nodemon http-mode.js",
+    "http-mode": "node_modules/.bin/nodemon http-mode.js",
+    "socket-mode": "node_modules/.bin/nodemon socket-mode.js",
+    "socket-mode-client": "node_modules/.bin/nodemon socket-mode-client.js",
     "start": "node index.js"
   },
   "repository": {
@@ -22,8 +25,9 @@
   },
   "homepage": "https://github.com/seratch/bolt-starter#readme",
   "dependencies": {
-    "@slack/bolt": "^2.2.3",
-    "dotenv": "^8.2.0"
+    "@slack/bolt": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "https-proxy-agent": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

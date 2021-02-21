@@ -7,12 +7,14 @@ for (const k in config) {
 }
 
 const { LogLevel } = require("@slack/logger");
-const logLevel = process.env.SLACK_LOG_LEVEL || LogLevel.DEBUG;
+const logLevel = process.env.SLACK_LOG_LEVEL || LogLevel.INFO;
 
 const { App, ExpressReceiver } = require("@slack/bolt");
 // If you deploy this app to FaaS, turning this on is highly recommended
 // Refer to https://github.com/slackapi/bolt/issues/395 for details
 const processBeforeResponse = false;
+// Enable helpful logging for debugging
+const developerMode = true;
 // Manually instantiate to add external routes afterwards
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -23,6 +25,7 @@ const app = new App({
   logLevel,
   receiver,
   processBeforeResponse,
+  developerMode,
 });
 
 // Request dumper middleware for easier debugging
