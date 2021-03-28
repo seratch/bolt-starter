@@ -17,7 +17,7 @@ if (typeof httpProxyUrl !== 'undefined') {
 // Enable helpful logging for debugging
 const developerMode = true;
 const { LogLevel } = require("@slack/logger");
-const logLevel = process.env.SLACK_LOG_LEVEL || LogLevel.INFO;
+const logLevel = process.env.SLACK_LOG_LEVEL || LogLevel.DEBUG;
 
 const { App } = require("@slack/bolt");
 const app = new App({
@@ -57,12 +57,34 @@ if (process.env.SLACK_REQUEST_LOG_ENABLED === "1") {
 // https://api.slack.com/apps/{APP_ID}/event-subscriptions
 app.event("app_mention", async ({ logger, event, say }) => {
   logger.debug("app_mention event payload:\n\n" + JSON.stringify(event, null, 2) + "\n");
-  const result = await say({ text: `:wave: <@${event.user}> Hi there!` });
+  const result = await say({
+    text: `:wave: <@${event.user}> Hi there!`,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "This is a section block with a button."
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Click Me",
+            "emoji": true
+          },
+          "value": "click_me_123",
+          "action_id": "button-action"
+        }
+      }
+
+    ]
+
+  });
   logger.debug("say result:\n\n" + JSON.stringify(result, null, 2) + "\n");
-  return result;
 });
 
-app.shortcut("open-modal", async ({ logger, client, body, ack }) => {
+app.shortcut("socket-mode-shortcut", async ({ logger, client, body, ack }) => {
   await openModal({ logger, client, ack, body });
 });
 
@@ -101,6 +123,24 @@ async function openModal({ logger, client, ack, body }) {
           "emoji": true
         },
         "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "This is a section block with a button."
+            },
+            "accessory": {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Click Me",
+                "emoji": true
+              },
+              "value": "click_me_123",
+              "action_id": "button-action"
+            }
+          }
+          ,
           {
             "type": "input",
             "block_id": "input-title",

@@ -13,8 +13,6 @@ const { App, ExpressReceiver } = require("@slack/bolt");
 // If you deploy this app to FaaS, turning this on is highly recommended
 // Refer to https://github.com/slackapi/bolt/issues/395 for details
 const processBeforeResponse = false;
-// Enable helpful logging for debugging
-const developerMode = true;
 // Manually instantiate to add external routes afterwards
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -25,7 +23,6 @@ const app = new App({
   logLevel,
   receiver,
   processBeforeResponse,
-  developerMode,
 });
 
 // Request dumper middleware for easier debugging
@@ -58,7 +55,6 @@ app.event("app_mention", async ({ logger, event, say }) => {
   logger.debug("app_mention event payload:\n\n" + JSON.stringify(event, null, 2) + "\n");
   const result = await say({ text: `:wave: <@${event.user}> Hi there!` });
   logger.debug("say result:\n\n" + JSON.stringify(result, null, 2) + "\n");
-  return result;
 });
 
 app.shortcut("open-modal", async ({ logger, client, body, ack }) => {
