@@ -233,7 +233,7 @@ function postViaResponseUrl(responseUrl, response) {
   return axios.post(responseUrl, response);
 }
 
-receiver.app.get("/", (_req, res) => {
+receiver.router.get("/", (_req, res) => {
   res.send("Your Bolt ⚡️ App is running!");
 });
 
