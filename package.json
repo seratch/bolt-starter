@@ -9,7 +9,8 @@
     "socket-mode": "node_modules/.bin/nodemon socket-mode.js",
     "socket-mode-client": "node_modules/.bin/nodemon socket-mode-client.js",
     "oauth": "node_modules/.bin/nodemon oauth.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "https-proxy-agent": "^5.0.0"
   },
   "devDependencies": {
+    "jest": "^27.4.5",
     "nodemon": "^2.0.4"
   }
 }
