@@ -42,6 +42,8 @@ const app = new App({
       throw new Error('Failed fetching installation');
     },
   },
+  // The initialization can be deferred until App#init() call when true
+  deferInitialization: true,
 });
 
 // Request dumper middleware for easier debugging
@@ -82,6 +84,12 @@ app.event("app_home_opened", async ({}) => {
 // ---------------------------------------------------------------
 
 (async () => {
-  await app.start(process.env.PORT || 3000);
-  console.log("⚡️ Bolt app is running!");
+  try {
+    await app.init();
+    await app.start(process.env.PORT || 3000);
+    console.log("⚡️ Bolt app is running!");
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 })();

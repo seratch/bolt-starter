@@ -19,6 +19,9 @@ const developerMode = true;
 const { LogLevel } = require("@slack/logger");
 const logLevel = process.env.SLACK_LOG_LEVEL || LogLevel.DEBUG;
 
+// The initialization can be deferred until App#init() call when true
+const deferInitialization = true;
+
 const { App } = require("@slack/bolt");
 const app = new App({
   socketMode: true,
@@ -27,6 +30,7 @@ const app = new App({
   agent,
   logLevel,
   developerMode,
+  deferInitialization,
 });
 
 // Request dumper middleware for easier debugging
@@ -279,6 +283,12 @@ function postViaResponseUrl(responseUrl, response) {
 }
 
 (async () => {
-  await app.start();
-  console.log("⚡️ Bolt app is running!");
+  try {
+    await app.init();
+    await app.start();
+    console.log("⚡️ Bolt app is running!");
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 })();
