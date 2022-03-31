@@ -9,7 +9,7 @@
     "socket-mode": "node_modules/.bin/nodemon socket-mode.js",
     "socket-mode-client": "node_modules/.bin/nodemon socket-mode-client.js",
     "oauth": "node_modules/.bin/nodemon oauth.js",
-    "start": "node index.js",
+    "start": "node socket-mode.js",
     "test": "jest"
   },
   "repository": {
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/seratch/bolt-starter#readme",
   "dependencies": {
-    "@slack/bolt": "^3.10.0",
+    "@slack/bolt": "^3.11.0",
     "dotenv": "^8.2.0",
     "https-proxy-agent": "^5.0.0"
   },
