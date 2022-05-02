@@ -13,6 +13,8 @@ const { App, ExpressReceiver } = require("@slack/bolt");
 // If you deploy this app to FaaS, turning this on is highly recommended
 // Refer to https://github.com/slackapi/bolt/issues/395 for details
 const processBeforeResponse = false;
+// The initialization can be deferred until App#init() call when true
+const deferInitialization = true;
 // Manually instantiate to add external routes afterwards
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -23,6 +25,7 @@ const app = new App({
   logLevel,
   receiver,
   processBeforeResponse,
+  deferInitialization,
 });
 
 // Request dumper middleware for easier debugging
@@ -238,6 +241,12 @@ receiver.router.get("/", (_req, res) => {
 });
 
 (async () => {
-  await app.start(process.env.PORT || 3000);
-  console.log("⚡️ Bolt app is running!");
+  try {
+    await app.init();
+    await app.start(process.env.PORT || 3000);
+    console.log("⚡️ Bolt app is running!");
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 })();
