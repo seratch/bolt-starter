@@ -22,7 +22,7 @@ Access **Features > OAuth & Permissions** from the left sidebar and set the foll
 
 `https://api.slack.com/apps/{APP_ID}/oauth`
 
-* `app_mentioned:read`
+* `app_mentions:read`
 * `chat:write`
 * `commands`
 
