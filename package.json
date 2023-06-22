@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/seratch/bolt-starter#readme",
   "dependencies": {
-    "@slack/bolt": "^3.11.0",
+    "@slack/bolt": "^3.13.1",
     "dotenv": "^8.2.0",
     "https-proxy-agent": "^5.0.0"
   },
