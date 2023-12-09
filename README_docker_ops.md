@@ -6,6 +6,7 @@ docker run \
   -p 3000:3000 \
   -e SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN} \
   -e SLACK_SIGNING_SECRET=${SLACK_SIGNING_SECRET} \
+  -e SLACK_LOG_LEVEL=debug \
   -it my-bolt-app
 ```
 
